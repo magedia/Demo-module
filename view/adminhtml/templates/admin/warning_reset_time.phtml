@@ -1,0 +1,24 @@
+<?php
+/**
+ * @var \Magento\Framework\View\Element\AbstractBlock $block
+ * @var \Magedia\Demo\ViewModel\GetResetTimeout $viewModel
+ */
+    $viewModel = $block->getViewModel();
+    $timerSettings = $viewModel->getTimerSettings();
+?>
+<div class="reset-warning-block" style="display: flex; justify-content: center; height: 50px; width: 100%; background-color: #FDFAA4">
+    <div class="warning-items">
+        <p><span class="title">Magedia Demo</span> - This store gets restored from sample data every <span id="reset_timeout"></span> minutes. Next restore
+            <span id="reset_timer"></span>.</p>
+        <p><span class="notice-text">Notice:</span>For spam reasons you cannot send emails and import/export data from this demo environment.</p>
+    </div>
+</div>
+<script type="text/x-magento-init">
+	{
+		"*":{
+			"Magedia_Demo/js/reset_timer": {
+			    "timerSettings": <?= $timerSettings ?>
+			}
+		}
+	}
+</script>

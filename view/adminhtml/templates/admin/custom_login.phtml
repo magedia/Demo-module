@@ -1,0 +1,58 @@
+<?php
+/**
+ * @var \Magento\Framework\View\Element\AbstractBlock $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+?>
+
+<form method="post" action="" id="login-form" data-mage-init='{"form": {}, "validation": {}}' autocomplete="off">
+    <fieldset class="admin__fieldset">
+        <legend class="admin__legend">
+            <span><?= $escaper->escapeHtml(__('Welcome, please sign in')) ?></span>
+        </legend><br/>
+        <input name="form_key" type="hidden" value="<?= $escaper->escapeHtmlAttr($block->getFormKey()) ?>" />
+        <div class="admin__field _required field-username">
+            <label for="username" class="admin__field-label">
+                <span><?= $escaper->escapeHtml(__('Username')) ?></span>
+            </label>
+            <div class="admin__field-control">
+                <input id="username"
+                       class="admin__control-text"
+                       type="text"
+                       name="login[username]"
+                       autofocus
+                       value="demo"
+                       data-validate="{required:true}"
+                       placeholder="<?= $escaper->escapeHtmlAttr(__('user name')) ?>"
+                       autocomplete="off"
+                        readonly
+                />
+            </div>
+        </div>
+        <div class="admin__field _required field-password">
+            <label for="login" class="admin__field-label">
+                <span><?= $escaper->escapeHtml(__('Password')) ?></span>
+            </label>
+            <div class="admin__field-control">
+                <input id="login"
+                       class="admin__control-text"
+                       type="password"
+                       name="login[password]"
+                       data-vsalidate="{required:true}"
+                       value="demo123"
+                       placeholder="<?= $escaper->escapeHtmlAttr(__('password')) ?>"
+                       autocomplete="off"
+                        readonly
+                />
+            </div>
+        </div>
+        <?= $block->getChildHtml('form.additional.info') ?>
+        <div class="form-actions">
+            <button
+                <?php $block->getUiId(); ?>
+                class="action-login action-primary">
+                <span><?= $escaper->escapeHtml(__('Sign in')) ?></span>
+            </button>
+        </div>
+    </fieldset>
+</form>

@@ -1,0 +1,11 @@
+{
+    "magedia_reset_config": {
+        "column": {
+            "id": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

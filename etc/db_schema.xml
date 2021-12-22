@@ -1,0 +1,12 @@
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="magedia_reset_config" resource="default" engine="innodb"
+           comment="Demo Reset Table">
+        <column xsi:type="int" name="id" padding="11" unsigned="true" identity="true" nullable="false" comment="Row ID"/>
+        <column xsi:type="datetime" name="updated_at" comment="Updated At"/>
+        <column xsi:type="datetime" name="next_update" comment="Next Update"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+</schema>
