@@ -1,0 +1,29 @@
+body.active-reload#html-body {
+    height: 100vh;
+    overflow: hidden;
+}
+
+body.active-reload#html-body::before {
+    content: '';
+    display: block;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 9999;
+}
+
+body.active-reload#html-body::after {
+    content: 'Please, wait...';
+    display: block;
+    position: fixed;
+    top: 47%;
+    left: 48%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 15px;
+    border-radius: 15px;
+    z-index: 10000;
+}
