@@ -4,5 +4,5 @@ namespace Magedia\Demo\Api;
 
 interface  CronMetadataInterface
 {
-    public const CRON_RESET_TIMEOUT = 5;
+    public const CRON_RESET_TIMEOUT = 30;
 }
