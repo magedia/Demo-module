@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Magedia Team
+ * @copyright Copyright (c) 2021 Magedia (https://www.magedia.com)
+ * @package   Magedia_PdfInvoice
+ * @version   1.0.0
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="magedia_pdfinvoice" translate="label" showInDefault="1" showInStore="1" showInWebsite="1">
+            <group id="general" type="text" sortOrder="10" showInDefault="0" showInWebsite="0" showInStore="0" translate="label"/>
+        </section>
+    </system>
+</config>

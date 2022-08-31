@@ -21,6 +21,8 @@ use Magento\Framework\Setup\InstallDataInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
 use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
+use Magedia\PdfInvoice\Model\ConfigProvider;
+use Magento\Framework\App\Config\Storage\WriterInterface;
 
 class InstallData implements InstallDataInterface
 {
@@ -45,21 +47,29 @@ class InstallData implements InstallDataInterface
     private TimezoneInterface $timezone;
 
     /**
+     * @var WriterInterface
+     */
+    private $configWriter;
+
+    /**
      * @param LoggerInterface $logger
      * @param LastResetTimeFactory $lastResetTimeFactory
      * @param LastResetResource $lastResetResource
      * @param TimezoneInterface $timezone
+     * @param WriterInterface $configWriter
      */
     public function __construct(
         LoggerInterface $logger,
         LastResetTimeFactory $lastResetTimeFactory,
         LastResetResource $lastResetResource,
-        TimezoneInterface $timezone
+        TimezoneInterface $timezone,
+        WriterInterface $configWriter
     ) {
         $this->logger = $logger;
         $this->lastResetTimeFactory = $lastResetTimeFactory;
         $this->lastResetResource = $lastResetResource;
         $this->timezone = $timezone;
+        $this->configWriter = $configWriter;
     }
 
     /**
@@ -79,6 +89,7 @@ class InstallData implements InstallDataInterface
         $nextUpdate->add(new DateInterval('PT' . CronMetadataInterface::CRON_RESET_TIMEOUT . 'M'));
         $installDemoTime->addData(['updated_at' => $updatedAt, 'next_update' => $nextUpdate]);
         $this->lastResetResource->save($installDemoTime);
+        $this->configWriter->save(ConfigProvider::PATH_PREFIX . ConfigProvider::XML_PATH_MODULE_ENABLE_PDF_INVOICE, 1);
 
         $setup->endSetup();
     }
