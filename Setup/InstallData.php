@@ -11,16 +11,16 @@ namespace Magedia\Demo\Setup;
 use DateInterval;
 use DateTime;
 use Exception;
-use Magedia\Demo\Model\ResetData\LastResetTimeFactory;
 use Magedia\Demo\Api\CronMetadataInterface;
-use Magedia\Demo\Model\ResetData\ResourceModel\LastResetTime as LastResetResource;
-use Magento\Framework\Exception\LocalizedException;
-use Psr\Log\LoggerInterface;
+use Magedia\Demo\Model\LastResetTimeFactory;
+use Magedia\Demo\Model\ResourceModel\LastResetTime as LastResetResource;
 use Magento\Framework\Exception\AlreadyExistsException;
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Setup\InstallDataInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
 use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
+use Psr\Log\LoggerInterface;
 
 class InstallData implements InstallDataInterface
 {

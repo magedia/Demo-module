@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Magedia\Demo\Model\ResetData\ResourceModel;
+namespace Magedia\Demo\Model\ResourceModel;
 
 use Magedia\Demo\Api\Data\ResetMetadataInterface;
 use Magento\Framework\Model\ResourceModel\Db\AbstractDb;

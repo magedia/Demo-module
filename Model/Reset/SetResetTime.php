@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Magedia\Demo\Model\ResetData\Reset;
+namespace Magedia\Demo\Model\Reset;
 
 use DateInterval;
 use DateTime;
 use Magedia\Demo\Api\CronMetadataInterface;
-use Magedia\Demo\Model\ResetData\LastResetTimeFactory;
-use Magedia\Demo\Model\ResetData\ResourceModel\LastResetTime as LastResetResource;
+use Magedia\Demo\Model\LastResetTimeFactory;
+use Magedia\Demo\Model\ResourceModel\LastResetTime as LastResetResource;
 use Magento\Framework\Exception\AlreadyExistsException;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Stdlib\DateTime\TimezoneInterface;

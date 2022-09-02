@@ -5,12 +5,11 @@ namespace Magedia\Demo\Cron;
 use DateInterval;
 use DateTime;
 use Exception;
-use Magedia\Demo\Api\CronMetadataInterface;
-use Magento\Framework\Exception\LocalizedException;
-use Psr\Log\LoggerInterface;
-use Magedia\Demo\Model\ResetData\LastResetTimeFactory;
-use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
+use Magedia\Demo\Model\LastResetTimeFactory;
 use Magento\Framework\Event\ManagerInterface as EventManager;
+use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
+use Psr\Log\LoggerInterface;
 
 class NextResetCheck
 {
