@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Magedia\Demo\Model\ResetData;
+namespace Magedia\Demo\Model;
 
+use Magedia\Demo\Model\ResourceModel\LastResetTime as LastResetResource;
 use Magento\Framework\Model\AbstractModel;
-use Magedia\Demo\Model\ResetData\ResourceModel\LastResetTime as LastResetResource;
 
 class LastResetTime extends AbstractModel
 {

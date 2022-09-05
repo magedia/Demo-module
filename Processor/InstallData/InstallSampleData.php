@@ -5,11 +5,10 @@ declare(strict_types=1);
 namespace Magedia\Demo\Processor\InstallData;
 
 use Exception;
-use Psr\Log\LoggerInterface;
-use Magento\Setup\Module\DataSetup;
+use Magedia\Demo\Processor\MagediaSampleData\ModulesPatches;
 use Magento\Framework\ObjectManagerInterface;
-use Magedia\Demo\Processor\InstallData\DemoInstallContext;
-use Magedia\Demo\Processor\InstallData\InstalledModules;
+use Psr\Log\LoggerInterface;
+use Magedia\Demo\Processor\MagentoSampleData\Order\OrdersData as MagentoOrders;
 
 class InstallSampleData
 {
@@ -19,63 +18,62 @@ class InstallSampleData
     private LoggerInterface $logger;
 
     /**
-     * @var DataSetup
-     */
-    private DataSetup $dataSetup;
-
-    /**
-     * @var DemoInstallContext
-     */
-    private DemoInstallContext $demoInstallContext;
-
-    /**
      * @var ObjectManagerInterface
      */
     private ObjectManagerInterface $objectManager;
 
     /**
-     * @var InstalledModules
+     * @var ModulesPatches
      */
-    private InstalledModules $installedModules;
+    private ModulesPatches $modulesPatches;
 
     /**
-     * @param DataSetup $dataSetup
-     * @param DemoInstallContext $demoInstallContext
+     * @var MagentoOrders
+     */
+    private MagentoOrders $magentoOrders;
+
+    /**
      * @param LoggerInterface $logger
-     * @param InstalledModules $installedModules
+     * @param ModulesPatches $modulesPatches
      * @param ObjectManagerInterface $objectManager
+     * @param MagentoOrders $magentoOrders
      */
     public function __construct(
-        DataSetup $dataSetup,
-        DemoInstallContext $demoInstallContext,
         LoggerInterface $logger,
-        InstalledModules $installedModules,
-        ObjectManagerInterface $objectManager
+        ModulesPatches $modulesPatches,
+        ObjectManagerInterface $objectManager,
+        MagentoOrders $magentoOrders
     ) {
         $this->logger = $logger;
-        $this->dataSetup = $dataSetup;
-        $this->demoInstallContext = $demoInstallContext;
         $this->objectManager = $objectManager;
-        $this->installedModules = $installedModules;
+        $this->modulesPatches = $modulesPatches;
+        $this->magentoOrders = $magentoOrders;
     }
 
     /**
      * Install sample data in all modules
-     *
-     * @return void
      */
     public function setUpData(): void
     {
-        foreach ($this->installedModules->createInstallDataPath() as $moduleDataPath){
-            try {
-                $installData = $this->objectManager->get($moduleDataPath);
-                $installData->install($this->dataSetup, $this->demoInstallContext);
-                $this->logger->info("Successfully install Sample Data for $moduleDataPath module.");
+        $this->setupModulesPatches();
+        $this->magentoOrders->createOrders();
+    }
+
+    private function setupModulesPatches()
+    {
+        $patches = $this->modulesPatches->createInstallDataPath();
+        foreach ($patches as $key => $moduleName){
+            foreach ($moduleName as $patchName) {
+                try {
+                    $patch = $this->objectManager->get("\Magedia\\$key\Setup\Patch\Data\\$patchName");
+                    $patch->apply();
+                    $this->logger->info("Successfully install Sample Data for $moduleName module.");
+                } catch(Exception $e) {
+                    $this->logger->info($e->getMessage());
+                    continue;
+                }
             }
-            catch(Exception $e) {
-                $this->logger->info($e->getMessage());
-                continue;
-            }
+
         }
     }
 }

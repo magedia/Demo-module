@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Magedia\Demo\ViewModel;
 
+use Magedia\Demo\Api\CronMetadataInterface;
+use Magedia\Demo\Model\LastResetTime;
+use Magedia\Demo\Model\ResourceModel\LastResetTime as LastResetResource;
 use Magento\Framework\Serialize\SerializerInterface;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
-use Magedia\Demo\Model\ResetData\ResourceModel\LastResetTime as LastResetResource;
-use Magedia\Demo\Model\ResetData\LastResetTime;
-use Magedia\Demo\Api\CronMetadataInterface;
 
 class GetResetTimeout implements ArgumentInterface
 {
@@ -18,7 +18,7 @@ class GetResetTimeout implements ArgumentInterface
     private LastResetResource $lastResetTimeResource;
 
     /**
-     * @var LastResetTime
+     * @var \Magedia\Demo\Model\LastResetTime
      */
     private LastResetTime $lastResetTime;
 
@@ -29,7 +29,7 @@ class GetResetTimeout implements ArgumentInterface
 
     /**
      * @param LastResetResource $lastResetTimeResource
-     * @param LastResetTime $lastResetTime
+     * @param \Magedia\Demo\Model\LastResetTime $lastResetTime
      * @param SerializerInterface $serializer
      */
     public function __construct(
