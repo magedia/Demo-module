@@ -38,25 +38,52 @@ body.active-reload#html-body {
             width: 100%;
             background-color: #ffece3;
 
+            .warning-icon{
+                margin-left: 10%;
+                margin-top: 12px;
+            }
+
             .warning-items{
                 margin-top: 15px;
                 font-weight: 700;
                 font-size: 15px;
                 color: #8a8887;
-                margin-left: 12%;
+                margin-left: 1%;
             }
 
             .info {
                 margin-left: 30px;
 
-                .back-to-store{
-                    color: black;
-                    font-size: medium;
+                .back-to-store-block{
+                    color: #474747;
+                    display: flex;
+                    margin: -5px 0 0 5px;
+
+                    .arrow {
+                        font-size: 40px;
+                        margin: -25px 0 0 0;
+                    }
+
+                    .back-to-store {
+                        font-size: 14px;
+
+                        &:hover {
+                            text-decoration: underline;
+                        }
+                    }
+
+                    &:hover {
+                        text-decoration: none;
+                    }
+                }
+
+                .logo {
+                    width: 200px;
                 }
             }
 
             .more-block {
-                margin-left: 200px;
+                margin-left: 160px;
                 margin-top: 23px;
 
                 .more-demos {
@@ -64,6 +91,10 @@ body.active-reload#html-body {
                     background-color: initial;
                     padding: 5px 15px 10px 15px;
                     text-shadow: inherit;
+
+                    &:hover {
+                        box-shadow: 0 0 0 1px #eb5202;
+                    }
                 }
             }
         }

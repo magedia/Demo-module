@@ -2,14 +2,21 @@
 /**
  * @var \Magento\Framework\View\Element\AbstractBlock $block
  * @var \Magedia\Demo\ViewModel\GetResetTimeout $viewModel
+ * @var \Magento\Framework\Escaper $escaper
  */
     $viewModel = $block->getViewModel();
     $timerSettings = $viewModel->getTimerSettings();
 ?>
 <div class="reset-warning-block">
     <div class="info">
-        <imp class="logo" src="#"></imp>
-        <a class="back-to-store" href="#">&#8592; Back to Magedia store</a>
+        <img class="logo" src="<?= $escaper->escapeUrl($block->getViewFileUrl('Magedia_Demo::images/logo_text.png'));?>">
+        <a class="back-to-store-block" href="#">
+            <p class="arrow"> &#8592;</p>
+            <p class="back-to-store">Back to Magedia store </p>
+        </a>
+    </div>
+    <div class="warning-icon">
+        <img src="<?= $escaper->escapeUrl($block->getViewFileUrl('Magedia_Demo::images/icon.svg'));?>">
     </div>
     <div class="warning-items">
         <p>1. For spam reasons you cannot send emails and import/export data from this demo environment.</p>
