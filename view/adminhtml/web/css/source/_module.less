@@ -1,29 +1,103 @@
 body.active-reload#html-body {
     height: 100vh;
     overflow: hidden;
+
+    &:before {
+        content: '';
+        display: block;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 9999;
+    }
+
+    &:after {
+        content: 'Please, wait...';
+        display: block;
+        position: fixed;
+        top: 47%;
+        left: 48%;
+        transform: translate(-50%, -50%);
+        background: white;
+        padding: 15px;
+        border-radius: 15px;
+        z-index: 10000;
+    }
 }
 
-body.active-reload#html-body::before {
-    content: '';
-    display: block;
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 9999;
-}
+.page-wrapper {
+    .notices-wrapper {
+        margin: 0;
 
-body.active-reload#html-body::after {
-    content: 'Please, wait...';
-    display: block;
-    position: fixed;
-    top: 47%;
-    left: 48%;
-    transform: translate(-50%, -50%);
-    background: white;
-    padding: 15px;
-    border-radius: 15px;
-    z-index: 10000;
+        .reset-warning-block {
+            display: flex;
+            height: 90px;
+            width: 100%;
+            background-color: #ffece3;
+
+            .warning-icon{
+                margin-left: 10%;
+                margin-top: 12px;
+            }
+
+            .warning-items{
+                margin-top: 15px;
+                font-weight: 700;
+                font-size: 15px;
+                color: #8a8887;
+                margin-left: 1%;
+            }
+
+            .info {
+                margin-left: 30px;
+
+                .back-to-store-block{
+                    color: #474747;
+                    display: flex;
+                    margin: -5px 0 0 5px;
+
+                    .arrow {
+                        font-size: 40px;
+                        margin: -25px 0 0 0;
+                    }
+
+                    .back-to-store {
+                        font-size: 14px;
+
+                        &:hover {
+                            text-decoration: underline;
+                        }
+                    }
+
+                    &:hover {
+                        text-decoration: none;
+                    }
+                }
+
+                .logo {
+                    width: 200px;
+                }
+            }
+
+            .more-block {
+                margin-left: 160px;
+                margin-top: 23px;
+
+                .more-demos {
+                    color: #eb5202;
+                    background-color: initial;
+                    padding: 5px 15px 10px 15px;
+                    text-shadow: inherit;
+
+                    &:hover {
+                        box-shadow: 0 0 0 1px #eb5202;
+                    }
+                }
+            }
+        }
+
+    }
 }

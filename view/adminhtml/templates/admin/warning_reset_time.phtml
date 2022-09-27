@@ -2,15 +2,29 @@
 /**
  * @var \Magento\Framework\View\Element\AbstractBlock $block
  * @var \Magedia\Demo\ViewModel\GetResetTimeout $viewModel
+ * @var \Magento\Framework\Escaper $escaper
  */
     $viewModel = $block->getViewModel();
     $timerSettings = $viewModel->getTimerSettings();
 ?>
-<div class="reset-warning-block" style="display: flex; justify-content: center; height: 50px; width: 100%; background-color: #FDFAA4">
+<div class="reset-warning-block">
+    <div class="info">
+        <img class="logo" src="<?= $escaper->escapeUrl($block->getViewFileUrl('Magedia_Demo::images/logo_text.png'));?>">
+        <a class="back-to-store-block" href="#">
+            <p class="arrow"> &#8592;</p>
+            <p class="back-to-store">Back to Magedia store </p>
+        </a>
+    </div>
+    <div class="warning-icon">
+        <img src="<?= $escaper->escapeUrl($block->getViewFileUrl('Magedia_Demo::images/icon.svg'));?>">
+    </div>
     <div class="warning-items">
-        <p><span class="title">Magedia Demo</span> - This store gets restored from sample data every <span id="reset_timeout"></span> minutes. Next restore
+        <p>1. For spam reasons you cannot send emails and import/export data from this demo environment.</p>
+        <p>2. This store gets restored from sample data every <span id="reset_timeout"></span> minutes. Next restore
             <span id="reset_timer"></span>.</p>
-        <p><span class="notice-text">Notice:</span>For spam reasons you cannot send emails and import/export data from this demo environment.</p>
+    </div>
+    <div class="more-block">
+        <a href="#" class="action-primary more-demos">More demos</a>
     </div>
 </div>
 <script type="text/x-magento-init">
