@@ -1,8 +1,16 @@
 <?xml version="1.0"?>
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
+        <referenceContainer name="header.container">
+            <block name="warning-block" template="Magedia_Demo::warning_reset_time.phtml" before="-">
+                <arguments>
+                    <argument name="type" xsi:type="string">timeout</argument>
+                    <argument name="view_model" xsi:type="object">Magedia\Demo\ViewModel\GetResetTimeout</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
         <referenceContainer name="global.notices">
-            <block name="warning-block" template="Magedia_Demo::admin/warning_reset_time.phtml">
+            <block name="warning-block" template="Magedia_Demo::warning_reset_time.phtml">
                 <arguments>
                     <argument name="type" xsi:type="string">timeout</argument>
                     <argument name="view_model" xsi:type="object">Magedia\Demo\ViewModel\GetResetTimeout</argument>
