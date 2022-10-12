@@ -9,6 +9,7 @@ use Magento\Framework\Exception\RuntimeException;
 class SalesTables extends AbstractTableGetter
 {
     const SALES_ORDER_TABLES = [
+	'inventory_reservation',
         'quote',
         'quote_address',
         'quote_address_item',

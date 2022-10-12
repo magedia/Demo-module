@@ -4,10 +4,10 @@ define([
     'use strict';
     return function (config){
         let currentTimeString = new Date(Date());
-        let currentTimeMilliseconds = Date.parse(currentTimeString) + (currentTimeString.getTimezoneOffset() * 60 * 1000);
+        let currentTimeMilliseconds = Date.parse(currentTimeString);
         let lastResetTime = config.timerSettings.last_reset_time;
         let resetTimeout = config.timerSettings.reset_timeout;
-        const nextResetTime = Date.parse(lastResetTime) + resetTimeout * 60 * 1000;
+        const nextResetTime = Date.parse(lastResetTime) + Math.abs(currentTimeString.getTimezoneOffset() * 60 * 1000) + resetTimeout * 60 * 1000;
         let timeToReset = (nextResetTime - currentTimeMilliseconds) / 1000;
         const bodyTag = $('body');
 
