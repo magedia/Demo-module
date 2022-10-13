@@ -1,11 +1,8 @@
 <?php
 /**
  * @var \Magento\Framework\View\Element\AbstractBlock $block
- * @var \Magedia\Demo\ViewModel\GetResetTimeout $viewModel
  * @var \Magento\Framework\Escaper $escaper
  */
-$viewModel = $block->getViewModel();
-$timerSettings = $viewModel->getTimerSettings();
 $magediaSiteUrl = 'https://magedia.com/';
 $marketplaceUrl = 'https://marketplace.magento.com/magedia-m2-pdf-invoice.html';
 ?>
@@ -34,9 +31,7 @@ $marketplaceUrl = 'https://marketplace.magento.com/magedia-m2-pdf-invoice.html';
 <script type="text/x-magento-init">
 	{
 		"*":{
-			"Magedia_Demo/js/reset_timer": {
-			    "timerSettings": <?= $timerSettings ?>
-			}
+			"Magedia_Demo/js/reset_timer": {}
 		}
 	}
 </script>
