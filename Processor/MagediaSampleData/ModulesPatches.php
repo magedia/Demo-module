@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Magedia\Demo\Processor\MagediaSampleData;
 
-use Magedia\Demo\Api\UnavailableModulesMetadataInterface;
+use Magedia\Demo\Api\Data\Magedia\ResetMetadataInterface;
 
 class ModulesPatches
 {
     /**
      * @var string
      */
-    private $magentoPath;
+    private string $magentoPath;
 
     /**
      * Create path to InstallData for all installed modules
@@ -47,7 +47,7 @@ class ModulesPatches
         $this->magentoPath = dirname(__FILE__, 4);
         $installModules = array_slice(scandir($this->magentoPath), 2);
         foreach ($installModules as $moduleName) {
-            if (!in_array($moduleName, UnavailableModulesMetadataInterface::UNAVAILABLE_MODULES)) {
+            if (!in_array($moduleName, ResetMetadataInterface::UNAVAILABLE_MODULES)) {
                 $availableModules[] = $moduleName;
             }
         }

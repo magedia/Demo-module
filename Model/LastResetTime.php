@@ -9,7 +9,10 @@ use Magento\Framework\Model\AbstractModel;
 
 class LastResetTime extends AbstractModel
 {
-    protected function _construct()
+    /**
+     * @return void
+     */
+    protected function _construct(): void
     {
         $this->_init(LastResetResource::class);
     }

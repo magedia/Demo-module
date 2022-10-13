@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Magedia\Demo\Model\Reset\MagediaTables;
+namespace Magedia\Demo\Model\Reset\DatabaseTables\Magedia;
 
-use Magedia\Demo\Api\Data\ResetMetadataInterface;
-use Magedia\Demo\Model\Reset\AbstractTableGetter;
+use Magedia\Demo\Api\Data\Magedia\ResetMetadataInterface;
+use Magedia\Demo\Model\Reset\DatabaseTables\AbstractTableGetter;
 use Magento\Framework\Exception\FileSystemException;
 use Magento\Framework\Exception\RuntimeException;
 

@@ -6,7 +6,7 @@ namespace Magedia\Demo\Model\Reset;
 
 use DateInterval;
 use DateTime;
-use Magedia\Demo\Api\CronMetadataInterface;
+use Magedia\Demo\Api\Data\CronMetadataInterface;
 use Magedia\Demo\Model\LastResetTimeFactory;
 use Magedia\Demo\Model\ResourceModel\LastResetTime as LastResetResource;
 use Magento\Framework\Exception\AlreadyExistsException;
@@ -33,6 +33,7 @@ class SetResetTime
     /**
      * @param LastResetTimeFactory $lastResetTime
      * @param LastResetResource $lastResetResource
+     * @param TimezoneInterface $timezone
      */
     public function __construct(
         LastResetTimeFactory $lastResetTime,
@@ -50,7 +51,7 @@ class SetResetTime
      * @throws AlreadyExistsException
      * @throws LocalizedException
      */
-    public function setLastResetTime()
+    public function setLastResetTime(): void
     {
         $lastReset = $this->lastResetTime->create();
         $lastResetUpdate = $lastReset->load(1);

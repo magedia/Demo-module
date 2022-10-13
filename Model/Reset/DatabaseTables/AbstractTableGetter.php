@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Magedia\Demo\Model\Reset;
+namespace Magedia\Demo\Model\Reset\DatabaseTables;
 
 use Magento\Framework\App\DeploymentConfig;
 use Magento\Framework\App\ResourceConnection;
@@ -30,5 +30,4 @@ class AbstractTableGetter
         $this->resourceConnection = $resourceConnection;
         $this->deploymentConfig = $deploymentConfig;
     }
-
 }

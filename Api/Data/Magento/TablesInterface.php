@@ -1,15 +1,13 @@
 <?php
 
-namespace Magedia\Demo\Model\Reset\MagentoTables\Order;
+declare(strict_types=1);
 
-use Magedia\Demo\Model\Reset\AbstractTableGetter;
-use Magento\Framework\Exception\FileSystemException;
-use Magento\Framework\Exception\RuntimeException;
+namespace Magedia\Demo\Api\Data\Magento;
 
-class SalesTables extends AbstractTableGetter
+interface TablesInterface
 {
-    const SALES_ORDER_TABLES = [
-	'inventory_reservation',
+    public const SALES_ORDER_TABLES = [
+        'inventory_reservation',
         'quote',
         'quote_address',
         'quote_address_item',
@@ -55,23 +53,4 @@ class SalesTables extends AbstractTableGetter
         'tax_order_aggregated_created',
         'tax_order_aggregated_updated',
     ];
-
-    /**
-     * Get all order sales tables
-     *
-     * @return array
-     * @throws FileSystemException
-     * @throws RuntimeException
-     */
-    public function getSalesOrderTables(): array
-    {
-        $connection =  $this->resourceConnection->getConnection('read');
-        $select = $connection->select()
-            ->from("information_schema.tables")
-            ->columns(['table_name'])
-            ->where('table_schema = ?', $this->deploymentConfig->get('db/connection/default/dbname'))
-            ->where('table_name in( ? )', self::SALES_ORDER_TABLES);
-
-        return $connection->fetchAll($select);
-    }
 }

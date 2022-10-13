@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Magedia\Demo\Cron;
 
 use DateInterval;
@@ -9,28 +11,34 @@ use Magedia\Demo\Model\LastResetTimeFactory;
 use Magento\Framework\Event\ManagerInterface as EventManager;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
-use Psr\Log\LoggerInterface;
 
 class NextResetCheck
 {
     /**
-     * @var LoggerInterface
+     * @var LastResetTimeFactory
      */
-    private LoggerInterface $logger;
     private LastResetTimeFactory $lastResetTimeFactory;
+
+    /**
+     * @var TimezoneInterface
+     */
     private TimezoneInterface $timezone;
+
+    /**
+     * @var EventManager
+     */
     private EventManager $eventManager;
 
     /**
-     * @param LoggerInterface $logger
+     * @param LastResetTimeFactory $lastResetTimeFactory
+     * @param TimezoneInterface $timezone
+     * @param EventManager $eventManager
      */
     public function __construct(
-        LoggerInterface $logger,
         LastResetTimeFactory $lastResetTimeFactory,
         TimezoneInterface $timezone,
         EventManager $eventManager
     ) {
-        $this->logger = $logger;
         $this->lastResetTimeFactory = $lastResetTimeFactory;
         $this->timezone = $timezone;
         $this->eventManager = $eventManager;
@@ -42,7 +50,7 @@ class NextResetCheck
      * @throws LocalizedException
      * @throws Exception
      */
-    public function execute()
+    public function execute(): void
     {
         $lastReset = $this->lastResetTimeFactory->create();
         $resetTimeModel = $lastReset->load(1);

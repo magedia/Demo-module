@@ -1,6 +1,8 @@
 <?php
 
-namespace Magedia\Demo\Api;
+declare(strict_types=1);
+
+namespace Magedia\Demo\Api\Data;
 
 interface  CronMetadataInterface
 {
