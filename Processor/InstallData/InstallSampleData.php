@@ -6,9 +6,11 @@ namespace Magedia\Demo\Processor\InstallData;
 
 use Exception;
 use Magedia\Demo\Processor\MagediaSampleData\ModulesPatches;
+use Magedia\Demo\Processor\MagentoSampleData\Order\OrdersData as MagentoOrders;
+use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\ObjectManagerInterface;
 use Psr\Log\LoggerInterface;
-use Magedia\Demo\Processor\MagentoSampleData\Order\OrdersData as MagentoOrders;
 
 class InstallSampleData
 {
@@ -51,7 +53,8 @@ class InstallSampleData
     }
 
     /**
-     * Install sample data in all modules
+     * @throws NoSuchEntityException
+     * @throws LocalizedException
      */
     public function setUpData(): void
     {
@@ -59,7 +62,10 @@ class InstallSampleData
         $this->magentoOrders->createOrders();
     }
 
-    private function setupModulesPatches()
+    /**
+     * @return void
+     */
+    private function setupModulesPatches(): void
     {
         $patches = $this->modulesPatches->createInstallDataPath();
         foreach ($patches as $key => $moduleName){

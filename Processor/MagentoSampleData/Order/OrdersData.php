@@ -1,106 +1,71 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Magedia\Demo\Processor\MagentoSampleData\Order;
 
+use Magedia\Demo\Api\Data\Magento\OrderInterface;
 use Magento\Catalog\Model\ProductFactory;
 use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Customer\Model\CustomerFactory;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
-use Magento\Quote\Api\CartManagementInterface;
-use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Quote\Model\Quote\Address\Rate;
-use Magento\Store\Model\StoreManagerInterface;
 use Magento\Quote\Model\QuoteFactory;
 use Magento\Quote\Model\QuoteManagement;
+use Magento\Store\Model\StoreManagerInterface;
 
 class OrdersData
 {
-    const ORDERS_SAMPLE_DATA = [
-        [
-            'currency_id' => 'USD',
-            'email' => 'john_smith@order.com',
-            'shipping_address' => [
-                'firstname' => 'John',
-                'lastname' => 'Smith',
-                'street' => 'Green str, 67',
-                'city' => 'CityM',
-                'country_id' => 'US',
-                'region_id' => '1',
-                'region' => 'Alabama',
-                'postcode' => '46373',
-                'telephone' => '3468676',
-                'fax' => '32423',
-                'save_in_address_book' => 1
-            ],
-            'items' => [
-                ['product_id' => '7', 'qty' => 1],
-                ['product_id' => '4', 'qty' => 1]
-            ]
-        ],
-        [
-            'currency_id' => 'USD',
-            'email' => 'veronica_costello@order.com',
-            'shipping_address' => [
-                'firstname' => 'Veronica',
-                'lastname' => 'Costello',
-                'street' => '6146 Honey Bluff Parkway',
-                'city' => 'Calder',
-                'country_id' => 'US',
-                'region_id' => '5',
-                'region' => 'Michigan',
-                'postcode' => '49628-7978',
-                'telephone' => '77789',
-                'fax' => '32423',
-                'save_in_address_book' => 1
-            ],
-            'items' => [
-                ['product_id' => '6', 'qty' => 1],
-                ['product_id' => '8', 'qty' => 1],
-                ['product_id' => '3', 'qty' => 1],
-                ['product_id' => '9', 'qty' => 1]
-            ]
-        ],
-        [
-            'currency_id' => 'USD',
-            'email' => 'roni_cost@order.com',
-            'shipping_address' => [
-                'firstname' => 'Roni',
-                'lastname' => 'Cost',
-                'street' => 'Order street, 12',
-                'city' => 'Ordercity',
-                'country_id' => 'US',
-                'region_id' => '2',
-                'region' => 'Alaska',
-                'postcode' => '43244',
-                'telephone' => '52332',
-                'fax' => '32423',
-                'save_in_address_book' => 1
-            ],
-            'items' => [
-                ['product_id' => '14', 'qty' => 1],
-                ['product_id' => '20', 'qty' => 1]
-            ]
-        ],
-    ];
-
+    /**
+     * @var StoreManagerInterface
+     */
     private StoreManagerInterface $_storeManager;
+
+    /**
+     * @var ProductFactory
+     */
     private ProductFactory $_productFactory;
+
+    /**
+     * @var CustomerFactory
+     */
     private CustomerFactory $customerFactory;
-    private CartRepositoryInterface $cartRepositoryInterface;
+
+    /**
+     * @var CustomerRepositoryInterface
+     */
     private CustomerRepositoryInterface $customerRepository;
-    private CartManagementInterface $cartManagementInterface;
+
+    /**
+     * @var Rate
+     */
     private Rate $shippingRate;
+
+    /**
+     * @var QuoteFactory
+     */
     private QuoteFactory $quote;
+
+    /**
+     * @var QuoteManagement
+     */
     private QuoteManagement $quoteManagment;
 
+    /**
+     * @param StoreManagerInterface $storeManager
+     * @param ProductFactory $productFactory
+     * @param CustomerFactory $customerFactory
+     * @param CustomerRepositoryInterface $customerRepository
+     * @param Rate $shippingRate
+     * @param QuoteFactory $quote
+     * @param QuoteManagement $quoteManagment
+     */
     public function __construct(
         StoreManagerInterface       $storeManager,
         ProductFactory              $productFactory,
         CustomerFactory             $customerFactory,
         CustomerRepositoryInterface $customerRepository,
-        CartRepositoryInterface     $cartRepositoryInterface,
-        CartManagementInterface     $cartManagementInterface,
         Rate                        $shippingRate,
         QuoteFactory $quote,
         QuoteManagement $quoteManagment
@@ -109,8 +74,6 @@ class OrdersData
         $this->_productFactory = $productFactory;
         $this->customerFactory = $customerFactory;
         $this->customerRepository = $customerRepository;
-        $this->cartRepositoryInterface = $cartRepositoryInterface;
-        $this->cartManagementInterface = $cartManagementInterface;
         $this->shippingRate = $shippingRate;
         $this->quote = $quote;
         $this->quoteManagment = $quoteManagment;
@@ -122,12 +85,12 @@ class OrdersData
      * @throws NoSuchEntityException
      * @throws \Exception
      */
-    public function createOrders()
+    public function createOrders(): void
     {
         $store = $this->_storeManager->getStore();
         $websiteId = $this->_storeManager->getStore()->getWebsiteId();
 
-        foreach (self::ORDERS_SAMPLE_DATA as $order) {
+        foreach (OrderInterface::ORDERS_SAMPLE_DATA as $order) {
             $customer = $this->customerFactory->create();
             $customer->setWebsiteId($websiteId);
             $customer->loadByEmail($order['email']);

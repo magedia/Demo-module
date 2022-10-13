@@ -1,17 +1,13 @@
 <?php
-/**
- * @author    Magedia Team
- * @copyright Copyright (c) 2021 Magedia (https://www.magedia.com)
- * @package   Magedia_PdfInvoice
- * @version   1.0.0
- */
+
+declare(strict_types=1);
 
 namespace Magedia\Demo\Setup;
 
 use DateInterval;
 use DateTime;
 use Exception;
-use Magedia\Demo\Api\CronMetadataInterface;
+use Magedia\Demo\Api\Data\CronMetadataInterface;
 use Magedia\Demo\Model\LastResetTimeFactory;
 use Magedia\Demo\Model\ResourceModel\LastResetTime as LastResetResource;
 use Magento\Framework\Exception\AlreadyExistsException;
@@ -20,15 +16,9 @@ use Magento\Framework\Setup\InstallDataInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
 use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
-use Psr\Log\LoggerInterface;
 
 class InstallData implements InstallDataInterface
 {
-    /**
-     * @var LoggerInterface
-     */
-    private LoggerInterface $logger;
-
     /**
      * @var LastResetTimeFactory
      */
@@ -45,18 +35,15 @@ class InstallData implements InstallDataInterface
     private TimezoneInterface $timezone;
 
     /**
-     * @param LoggerInterface $logger
      * @param LastResetTimeFactory $lastResetTimeFactory
      * @param LastResetResource $lastResetResource
      * @param TimezoneInterface $timezone
      */
     public function __construct(
-        LoggerInterface $logger,
         LastResetTimeFactory $lastResetTimeFactory,
         LastResetResource $lastResetResource,
         TimezoneInterface $timezone
     ) {
-        $this->logger = $logger;
         $this->lastResetTimeFactory = $lastResetTimeFactory;
         $this->lastResetResource = $lastResetResource;
         $this->timezone = $timezone;

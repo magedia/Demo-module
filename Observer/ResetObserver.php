@@ -1,13 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Magedia\Demo\Observer;
 
+use Magedia\Demo\Model\Reset\ConfigUpdater;
+use Magedia\Demo\Model\Reset\DatabaseTables\Magedia\CustomTables;
+use Magedia\Demo\Model\Reset\DatabaseTables\Magento\Order\SalesTables;
 use Magedia\Demo\Model\Reset\DataRemover;
+use Magedia\Demo\Model\Reset\SetResetTime;
 use Magedia\Demo\Processor\InstallData\InstallSampleData;
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
-use Magedia\Demo\Model\Reset\MagentoTables\Order\SalesTables;
-use Magedia\Demo\Model\Reset\MagediaTables\CustomTables;
 use Magento\Framework\Exception\AlreadyExistsException;
 use Magento\Framework\Exception\FileSystemException;
 use Magento\Framework\Exception\LocalizedException;
@@ -15,9 +19,30 @@ use Magento\Framework\Exception\RuntimeException;
 
 class ResetObserver implements ObserverInterface
 {
+    /**
+     * @var DataRemover
+     */
     private DataRemover $dataRemover;
+
+    /**
+     * @var InstallSampleData
+     */
     private InstallSampleData $installSampleData;
+
+    /**
+     * @var array
+     */
     private array $tableToRemove = [];
+
+    /**
+     * @var ConfigUpdater
+     */
+    private ConfigUpdater $configUpdater;
+
+    /**
+     * @var SetResetTime
+     */
+    private SetResetTime $setResetTime;
 
     /**
      * @throws FileSystemException
@@ -27,7 +52,9 @@ class ResetObserver implements ObserverInterface
         DataRemover $dataRemover,
         InstallSampleData $installSampleData,
         SalesTables $salesTables,
-        CustomTables $customTables
+        CustomTables $customTables,
+        ConfigUpdater $configUpdater,
+        SetResetTime $setResetTime
     ) {
         $this->dataRemover = $dataRemover;
         $this->installSampleData = $installSampleData;
@@ -35,6 +62,8 @@ class ResetObserver implements ObserverInterface
             $salesTables->getSalesOrderTables(),
             $customTables->getCustomTableNames()
         );
+        $this->configUpdater = $configUpdater;
+        $this->setResetTime = $setResetTime;
     }
 
     /**
@@ -47,5 +76,7 @@ class ResetObserver implements ObserverInterface
     {
         $this->dataRemover->truncateTables($this->tableToRemove);
         $this->installSampleData->setUpData();
+        $this->configUpdater->reset();
+        $this->setResetTime->setLastResetTime();
     }
 }
