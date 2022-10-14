@@ -14,7 +14,7 @@ define([
         function timerCountLogic(config) {
             let currentTimeString = new Date(Date());
             let currentTimeMilliseconds = Date.parse(currentTimeString);
-            let lastResetTime = config.last_reset_time;
+            let lastResetTime = config.last_reset_time.replace(/-/g, '/').replace(/[a-z]+/gi, ' ');
             let resetTimeout = config.reset_timeout;
             const nextResetTime = Date.parse(lastResetTime) + Math.abs(currentTimeString.getTimezoneOffset() * 60 * 1000) + resetTimeout * 60 * 1000;
             let timeToReset = (nextResetTime - currentTimeMilliseconds) / 1000;
