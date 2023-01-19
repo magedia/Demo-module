@@ -53,7 +53,7 @@ interface OrderInterface
         ],
         [
             'currency_id' => 'USD',
-            'email' => 'roni_cost@order.com',
+            'email' => 'roni_cost@example.com',
             'shipping_address' => [
                 'firstname' => 'Roni',
                 'lastname' => 'Cost',
