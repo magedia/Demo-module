@@ -6,6 +6,9 @@ namespace Magedia\Demo\Processor\InstallData;
 
 use Exception;
 use Magedia\Demo\Processor\MagediaSampleData\ModulesPatches;
+use Magedia\Demo\Processor\MagentoSampleData\Invoice\InvoicesData as MagentoInvoices;
+use Magedia\Demo\Processor\MagentoSampleData\CreditMemo\CreditMemosData as MagentoCreditMemos;
+use Magedia\Demo\Processor\MagentoSampleData\Shipment\ShipmentsData as MagentoShipments;
 use Magedia\Demo\Processor\MagentoSampleData\Order\OrdersData as MagentoOrders;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
@@ -33,23 +36,26 @@ class InstallSampleData
      * @var MagentoOrders
      */
     private MagentoOrders $magentoOrders;
+    private MagentoInvoices $magentoInvoices;
+    private MagentoCreditMemos $magentoCreditMemos;
+    private MagentoShipments $magentoShipments;
 
-    /**
-     * @param LoggerInterface $logger
-     * @param ModulesPatches $modulesPatches
-     * @param ObjectManagerInterface $objectManager
-     * @param MagentoOrders $magentoOrders
-     */
     public function __construct(
         LoggerInterface $logger,
         ModulesPatches $modulesPatches,
         ObjectManagerInterface $objectManager,
-        MagentoOrders $magentoOrders
+        MagentoOrders $magentoOrders,
+        MagentoInvoices $magentoInvoices,
+        MagentoCreditMemos $magentoCreditMemos,
+        MagentoShipments $magentoShipments
     ) {
         $this->logger = $logger;
         $this->objectManager = $objectManager;
         $this->modulesPatches = $modulesPatches;
         $this->magentoOrders = $magentoOrders;
+        $this->magentoInvoices = $magentoInvoices;
+        $this->magentoCreditMemos = $magentoCreditMemos;
+        $this->magentoShipments = $magentoShipments;
     }
 
     /**
@@ -60,6 +66,9 @@ class InstallSampleData
     {
         $this->setupModulesPatches();
         $this->magentoOrders->createOrders();
+        $this->magentoInvoices->createInvoices();
+        $this->magentoCreditMemos->createCreditMemos();
+        $this->magentoShipments->createShipments();
     }
 
     /**
@@ -68,18 +77,17 @@ class InstallSampleData
     private function setupModulesPatches(): void
     {
         $patches = $this->modulesPatches->createInstallDataPath();
-        foreach ($patches as $key => $moduleName){
+        foreach ($patches as $key => $moduleName) {
             foreach ($moduleName as $patchName) {
                 try {
                     $patch = $this->objectManager->get("\Magedia\\$key\Setup\Patch\Data\\$patchName");
                     $patch->apply();
                     $this->logger->info("Successfully install Sample Data for $moduleName module.");
-                } catch(Exception $e) {
+                } catch (Exception $e) {
                     $this->logger->info($e->getMessage());
                     continue;
                 }
             }
-
         }
     }
 }
