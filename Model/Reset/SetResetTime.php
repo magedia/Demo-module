@@ -39,7 +39,7 @@ class SetResetTime
         LastResetTimeFactory $lastResetTime,
         LastResetResource $lastResetResource,
         TimezoneInterface $timezone
-    ){
+    ) {
         $this->lastResetTime = $lastResetTime;
         $this->lastResetResource = $lastResetResource;
         $this->timezone = $timezone;

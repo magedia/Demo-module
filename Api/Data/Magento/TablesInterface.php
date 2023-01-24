@@ -52,5 +52,16 @@ interface TablesInterface
         'sales_shipping_aggregated_order',
         'tax_order_aggregated_created',
         'tax_order_aggregated_updated',
+        'salesrule',
+        'salesrule_coupon',
+        'salesrule_coupon_aggregated',
+        'salesrule_coupon_aggregated_order',
+        'salesrule_coupon_aggregated_updater',
+        'salesrule_coupon_usage',
+        'salesrule_customer',
+        'salesrule_customer_group',
+        'salesrule_label',
+        'salesrule_product_attribute',
+        'salesrule_website'
     ];
 }

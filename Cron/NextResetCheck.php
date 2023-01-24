@@ -58,7 +58,7 @@ class NextResetCheck
         $currentTime = $this->timezone->convertConfigTimeToUtc($this->timezone->date());
         $currentTimeString = new DateTime("$currentTime");
         $currentTimeString->add(new DateInterval('PT' . 1 . 'M'));
-        if($currentTimeString >= new DateTime("$nextReset")) {
+        if ($currentTimeString >= new DateTime("$nextReset")) {
             $this->eventManager->dispatch('reset_sample_data');
         }
     }

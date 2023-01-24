@@ -31,7 +31,7 @@ class DataRemover
     public function truncateTables(array $tables): void
     {
         $connection =  $this->resourceConnection->getConnection('write');
-        foreach ($tables[0] as $table){
+        foreach ($tables[0] as $table) {
             $connection->delete($table['TABLE_NAME']);
         }
     }
