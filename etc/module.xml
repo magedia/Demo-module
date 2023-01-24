@@ -12,8 +12,6 @@
     <module name="Magedia_Demo" setup_version="1.0.0">
         <sequence>
             <module name="Magedia_Core"/>
-            <module name="Magedia_PdfInvoice"/>
-            <module name="Magedia_BannerManager" />
         </sequence>
     </module>
 </config>

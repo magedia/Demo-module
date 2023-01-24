@@ -21,7 +21,7 @@ class ModulesPatches
     public function createInstallDataPath(): array
     {
         $availableModules = $this->getInstallModulesName();
-        foreach ($availableModules as $moduleName){
+        foreach ($availableModules as $moduleName) {
             $modulePatches = [];
             $pathToPatches = "$this->magentoPath/$moduleName/Setup/Patch/Data";
             if (is_dir($pathToPatches)) {
