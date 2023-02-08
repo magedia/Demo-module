@@ -14,6 +14,8 @@ use Magento\Framework\Exception\AlreadyExistsException;
 use Magento\Framework\Exception\FileSystemException;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\RuntimeException;
+use Magedia\Demo\Model\Reset\ConfigUpdater;
+use Magedia\Demo\Processor\MagediaSampleData\AcartDataInstaller;
 
 class ResetObserver implements ObserverInterface
 {
@@ -33,6 +35,16 @@ class ResetObserver implements ObserverInterface
     private SetResetTime $setResetTime;
 
     /**
+     * @var ConfigUpdater
+     */
+    private ConfigUpdater $configUpdater;
+
+    /**
+     * @var AcartDataInstaller
+     */
+    private AcartDataInstaller $acartDataInstaller;
+
+    /**
      * @throws FileSystemException
      * @throws RuntimeException
      */
@@ -40,7 +52,9 @@ class ResetObserver implements ObserverInterface
         DataRemover $dataRemover,
         SalesTables $salesTables,
         CustomTables $customTables,
-        SetResetTime $setResetTime
+        SetResetTime $setResetTime,
+        ConfigUpdater $configUpdater,
+        AcartDataInstaller $acartDataInstaller
     ) {
         $this->dataRemover = $dataRemover;
         $this->tableToRemove[] = array_merge(
@@ -48,6 +62,8 @@ class ResetObserver implements ObserverInterface
             $customTables->getCustomTableNames()
         );
         $this->setResetTime = $setResetTime;
+        $this->configUpdater = $configUpdater;
+        $this->acartDataInstaller = $acartDataInstaller;
     }
 
     /**
@@ -59,6 +75,8 @@ class ResetObserver implements ObserverInterface
     public function execute(Observer $observer)
     {
         $this->dataRemover->truncateTables($this->tableToRemove);
+        $this->configUpdater->reset();
+        $this->acartDataInstaller->install();
         $this->setResetTime->setLastResetTime();
     }
 }
