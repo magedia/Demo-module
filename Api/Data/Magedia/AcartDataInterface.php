@@ -41,7 +41,7 @@ interface AcartDataInterface
         'website_id' => 1,
         'store_id' => 1,
         'coupon_used' => 2,
-        'status' => 2,
+        'status' => 1,
     ];
 
     public const SALESRULE_DATA = [
@@ -58,7 +58,7 @@ interface AcartDataInterface
         'sort_order' => '0',
         'is_active' => '1',
         'website_ids' => '1',
-        'customer_groups_ids' => '0',
+        'customer_groups_ids' => '1',
         'conditions' => '',
         'from_date' => '2/8/23',
     ];
