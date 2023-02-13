@@ -58,7 +58,7 @@ interface AcartDataInterface
         'sort_order' => '0',
         'is_active' => '1',
         'website_ids' => '1',
-        'customer_groups_ids' => '1',
+        'customer_group_ids' => '1',
         'conditions' => '',
         'from_date' => '2/8/23',
     ];

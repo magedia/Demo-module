@@ -62,6 +62,7 @@ interface TablesInterface
         'salesrule_customer_group',
         'salesrule_label',
         'salesrule_product_attribute',
-        'salesrule_website'
+        'salesrule_website',
+        'email_template'
     ];
 }
