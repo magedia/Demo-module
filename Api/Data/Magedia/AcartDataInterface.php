@@ -13,7 +13,6 @@ interface AcartDataInterface
         'is_out_of_stock_notification' => '0',
         'out_of_stock_template_id' => null,
         'low_stock_template_id' => null,
-        'email_template_id' => '1',
         'in_stock_template_id' => null,
         'expire_in' => null,
     ];
